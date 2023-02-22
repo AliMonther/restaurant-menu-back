@@ -15,6 +15,10 @@ class Category extends Model
         return $this->belongsTo(Menu::class);
     }
 
+    public function parent(){
+        return $this->belongsTo(Category::class ,'parent_id');
+    }
+
     public function items(){
         return $this->belongsToMany(Item::class,'category_item');
     }

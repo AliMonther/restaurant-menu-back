@@ -55,7 +55,7 @@ abstract class BaseRepository
         return $query->orderBy('id', 'DESC')->get($columns);
     }
 
-    public function withAttributes(array $attributes, array $with = null, array $columns = ['*'],  $orderBy = null,  $sortOrder = 'asc')
+    public function firstWithAttributes(array $attributes, array $with = null, array $columns = ['*'],  $orderBy = null,  $sortOrder = 'asc')
     {
         $query = $this->prepareQueryByAttributes($attributes, $orderBy, $sortOrder);
 
@@ -63,6 +63,16 @@ abstract class BaseRepository
 
         return $query->get($columns);
     }
+
+    public function getWithAttributes(array $attributes, array $with = null, array $columns = ['*'],  $orderBy = null,  $sortOrder = 'asc')
+    {
+        $query = $this->prepareQueryByAttributes($attributes, $orderBy, $sortOrder);
+
+        $this->prepareQuery($query,$with);
+
+        return $query->get($columns);
+    }
+
 
     public function paginate( $perPage = 15,  $conditions = null,  $with = null, $columns = ['*'],$order = null)
     {
