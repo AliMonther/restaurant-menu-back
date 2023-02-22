@@ -5,16 +5,15 @@ namespace App\Repositories;
 
 
 use App\UseCases\BaseUseCase;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 abstract class BaseRepository
 {
-    protected  $model;
+    protected $model;
 
-    public function __construct(Model $model = null)
-    {
+    public function __construct($model){
+
         $this->model = $model;
     }
 
@@ -122,14 +121,14 @@ abstract class BaseRepository
     {
         return $this->model->where($conditions)->delete();
     }
-    
+
     protected function prepareQuery(&$query,$with=null,$order=null){
         if ($with) {
             $query->with($with);
         }
 
         if ($order) {
-           $this->addSortToQuery($query , $order);
+            $this->addSortToQuery($query , $order);
         }
     }
 

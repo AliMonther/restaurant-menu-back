@@ -8,13 +8,6 @@ class BaseUseCase
 {
 
 
-
-    public function __construct(){
-
-
-    }
-
-
     /**
      * @param $actualValue
      * @param $correctResult
