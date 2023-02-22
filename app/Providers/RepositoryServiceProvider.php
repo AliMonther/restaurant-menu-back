@@ -2,8 +2,6 @@
 
 namespace App\Providers;
 
-
-
 use App\Models\Category;
 use App\Models\Config;
 use App\Models\Discount;
@@ -29,27 +27,28 @@ class RepositoryServiceProvider extends ServiceProvider
     {
 
         $this->app->singleton(UserRepository::class, function($app){
-            return new UserRepository( new User());
+
+            return new UserRepository(new User());
         });
 
         $this->app->singleton(MenuRepository::class, function($app){
-            return new MenuRepository( new Menu());
+            return new MenuRepository(new Menu());
         });
 
         $this->app->singleton(CategoryRepository::class, function($app){
-            return new CategoryRepository( new Category());
+            return new CategoryRepository(new Category());
         });
 
         $this->app->singleton(ItemRepository::class, function($app){
-            return new ItemRepository( new Item());
+            return new ItemRepository(new Item());
         });
 
         $this->app->singleton(DiscountRepository::class, function($app){
-            return new DiscountRepository( new Discount());
+            return new DiscountRepository(new Discount());
         });
 
         $this->app->singleton(ConfigRepository::class, function($app){
-            return new ConfigRepository( new Config());
+            return new ConfigRepository(new Config());
         });
 
 
@@ -62,6 +61,7 @@ class RepositoryServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+
         //
     }
 }
