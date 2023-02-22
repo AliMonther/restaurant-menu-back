@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->foreignId('menu_id')->references('id')->on('menus');
+            $table->foreignId('parent_id')->nullable()->references('id')->on('categories');
             $table->string('name','120');
             $table->timestamps();
         });

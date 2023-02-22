@@ -19,4 +19,13 @@ class Item extends Model
         return $this->morphOne(Discount::class, 'discountable');
     }
 
+    public function menuItems($menuId)
+    {
+        return $this->belongsToMany(Category::class, 'categories')
+            ->whereHas('menu', function ($query) use ($menuId) {
+//                dd();
+                 $query->where('id', $menuId);
+            });
+    }
+
 }

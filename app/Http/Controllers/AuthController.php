@@ -6,15 +6,12 @@ use App\Constants\UserConstants;
 use App\Http\Requests\auth\LoginRequest;
 use App\Http\Requests\auth\RegisterRequest;
 use App\Http\Resources\auth\UserResource;
-use App\traits\ResponseTrait;
 use App\UseCases\User\Login;
 use App\UseCases\User\Register;
-use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
 
-    use ResponseTrait;
 
     public function register(RegisterRequest $request , Register $register){
 
