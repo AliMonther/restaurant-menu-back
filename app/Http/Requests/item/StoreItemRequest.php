@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\item;
 
+use App\Rules\category\CheckCategoryItemsRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreItemRequest extends FormRequest
@@ -26,7 +27,7 @@ class StoreItemRequest extends FormRequest
         return [
             'name' => ['required' , 'string'],
             'price' => ['required' , 'numeric'],
-            'categories' => ['sometimes' , 'array'],
+            'categories' => ['sometimes' , 'array' , new CheckCategoryItemsRule()],
             'categories.*' => [ 'numeric' , 'exists:categories,id'],
         ];
     }
