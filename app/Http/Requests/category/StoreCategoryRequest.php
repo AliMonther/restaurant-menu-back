@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\category;
 
+use App\Rules\category\CheckCategoryChildrenLevelRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreCategoryRequest extends FormRequest
@@ -25,7 +26,7 @@ class StoreCategoryRequest extends FormRequest
     {
         return [
             'name' => [ 'required' , 'string' ],
-            'parent' => [ 'sometimes' , 'numeric', 'exists:categories,id' ],
+            'parent' => [ 'sometimes' , 'numeric', 'exists:categories,id' , new CheckCategoryChildrenLevelRule() ],
             'items' => [ 'sometimes' , 'array' ],
             'items.*' => ['exists:items,id' ],
             ];
