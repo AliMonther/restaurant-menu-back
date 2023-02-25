@@ -21,6 +21,8 @@ class ItemResource extends JsonResource
           'id'=>$this->id,
           'name'=>$this->name,
           'price'=>$this->price,
+          'discount' =>15,
+          'price_after_discount' => 1,
           'categories'=>$this->relationLoaded('categories') ? CategoryResource::collection($this->categories) : null,
           'created_at' => $this->created_at ? PrepareDate::execute($this->created_at) : null,
         ];

@@ -6,6 +6,7 @@ use App\Http\Requests\category\StoreCategoryRequest;
 use App\Http\Requests\Category\IndexCategoriesRequest;
 use App\Http\Resources\category\CategoryCollection;
 use App\Http\Resources\category\CategoryResource;
+use App\Models\Category;
 use App\UseCases\Category\ListCategories;
 use App\UseCases\Category\StoreCategory;
 use Illuminate\Http\Request;
@@ -50,12 +51,12 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  Category $category
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Category $category)
     {
-        //
+        return $this->success(new CategoryResource($category->load(['parent','items','children'])));
     }
 
     /**
