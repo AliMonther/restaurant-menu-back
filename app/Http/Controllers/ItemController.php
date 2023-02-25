@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\item\IndexItemRequest;
 use App\Http\Requests\item\StoreItemRequest;
 use App\Http\Resources\item\ItemResource;
+use App\Models\Item;
 use App\UseCases\Item\ListItems;
 use App\UseCases\Item\StoreItem;
 use Illuminate\Http\Request;
@@ -48,12 +49,12 @@ class ItemController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  Item  $item
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Item $item)
     {
-        //
+        return $this->success(new ItemResource($item->load(['categories'])));
     }
 
     /**

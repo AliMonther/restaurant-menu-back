@@ -3,6 +3,7 @@
 namespace App\Http\Resources\category;
 
 use App\Actions\PrepareDate;
+use App\Http\Resources\item\ItemResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class CategoryResource extends JsonResource
@@ -15,11 +16,13 @@ class CategoryResource extends JsonResource
      */
     public function toArray($request)
     {
-
         return [
             'id'=>$this->id,
             'name'=>$this->name,
             'parent'=>$this->relationLoaded('parent') ?  new CategoryResource($this->parent) : null,
+            'children'=>$this->relationLoaded('children') ?   CategoryResource::collection($this->children) : null,
+            'items'=>$this->relationLoaded('items') ?  ItemResource::collection($this->items) : null,
+            'discount'=>15,
             'created_at'=>PrepareDate::execute($this->created_at),
         ];
     }
