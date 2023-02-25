@@ -13,7 +13,7 @@ class ItemRepository extends BaseRepository
             return $query->whereHas('menu',function ($q) use ($menuId) {
                 return $q->where('id',$menuId);
             });
-        });
+        })->orderByDesc('id');
 
     }
 
