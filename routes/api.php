@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\MenuController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -31,4 +32,5 @@ Route::middleware('auth:api')->group(function () {
 
     Route::resource('categories',CategoryController::class);
     Route::resource('items',ItemController::class);
+    Route::get('menus/details',[MenuController::class,'getMenuDetails']);
 });

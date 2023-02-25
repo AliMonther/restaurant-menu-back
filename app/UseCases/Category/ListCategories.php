@@ -15,7 +15,7 @@ class ListCategories extends CategoryUseCase
 
         if(isset($data['all'])){
 
-            $categories = $this->categoryRepo->getWithAttributes(['menu_id'=>GetUserMenu::execute()->id]);
+            $categories = $this->categoryRepo->getWithAttributes(['menu_id'=>GetUserMenu::execute()->id],[] , ['*'] , 'id','desc');
             return CategoryResource::collection($categories);
         }
 
