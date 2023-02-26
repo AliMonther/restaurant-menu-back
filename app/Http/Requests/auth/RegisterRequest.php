@@ -29,6 +29,7 @@ class RegisterRequest extends FormRequest
             'email'=>['required','email' , 'unique:users,email' ],
             'password'=>[ 'required' , 'string' ],
             'menu_name'=>['required' , 'string' ],
+            'menu_discount'=>['numeric'],
         ];
     }
 }

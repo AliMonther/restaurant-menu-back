@@ -22,7 +22,7 @@ class CategoryResource extends JsonResource
             'parent'=>$this->relationLoaded('parent') ?  new CategoryResource($this->parent) : null,
             'children'=>$this->relationLoaded('children') ?   CategoryResource::collection($this->children) : null,
             'items'=>$this->relationLoaded('items') ?  ItemResource::collection($this->items) : null,
-            'discount'=>15,
+            'discount'=>$this->discount ? $this->discount->value : 0,
             'created_at'=>PrepareDate::execute($this->created_at),
         ];
     }

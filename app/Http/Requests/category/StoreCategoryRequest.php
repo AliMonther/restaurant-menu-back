@@ -27,6 +27,7 @@ class StoreCategoryRequest extends FormRequest
         return [
             'name' => [ 'required' , 'string' ],
             'parent' => [ 'sometimes' , 'numeric', 'exists:categories,id' , new CheckCategoryChildrenLevelRule() ],
+            'discount' => [ 'sometimes' , 'numeric' ],
             'items' => [ 'sometimes' , 'array' ],
             'items.*' => ['exists:items,id' ],
             ];

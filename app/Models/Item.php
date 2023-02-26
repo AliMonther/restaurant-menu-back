@@ -23,7 +23,6 @@ class Item extends Model
     {
         return $this->belongsToMany(Category::class, 'categories')
             ->whereHas('menu', function ($query) use ($menuId) {
-//                dd();
                  $query->where('id', $menuId);
             });
     }

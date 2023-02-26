@@ -12,4 +12,5 @@ class MenuController extends Controller
         $menuDetails = $menuDetails->execute();
         return $this->success(new MenuResource($menuDetails['menu'] , $menuDetails['items']));
     }
+
 }
