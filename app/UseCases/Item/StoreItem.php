@@ -5,15 +5,15 @@ namespace App\UseCases\Item;
 
 
 use App\Actions\AssignCategoriesToItem;
+use App\Actions\DiscountCreator\DiscountCreatorFactory;
 use Illuminate\Support\Facades\DB;
-use mysql_xdevapi\Exception;
 
 class StoreItem extends ItemUseCase
 {
 
     public function execute($data){
-       DB::beginTransaction();
-       try{
+//       DB::beginTransaction();
+//       try{
            $item = $this->itemRepo->create(
                [
                    'name'=>$data['name'],
@@ -24,14 +24,29 @@ class StoreItem extends ItemUseCase
            if (isset($data['categories'])){
                AssignCategoriesToItem::execute($item , $data['categories']);
            }
-            DB::commit();
+
+           //store category discount
+           $factory = new DiscountCreatorFactory();
+
+           $discount = isset($data['discount']) ? $data['discount'] : null;
+           $factoryData = [
+                'discountType'=>'item',
+                'model'=>$item,
+                'discountValue'=>$discount,
+                'discountRepository'=>$this->discountRepo,
+                'categories'=>isset($data['categories']) ? $data['categories'] : null,
+            ];
+
+           $factory->create($factoryData);
+
+//           DB::commit();
            return $item;
 
-       }
-       catch (\Exception $e){
-           DB::rollBack();
-           throw new \Exception($e->getMessage(),500);
-       }
+//       }
+//       catch (\Exception $e){
+//           DB::rollBack();
+//           throw new \Exception($e->getMessage(),500);
+//       }
 
     }
 }

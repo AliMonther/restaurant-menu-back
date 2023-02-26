@@ -27,7 +27,8 @@ class StoreItemRequest extends FormRequest
         return [
             'name' => ['required' , 'string'],
             'price' => ['required' , 'numeric'],
-            'categories' => ['sometimes' , 'array' , new CheckCategoryItemsRule()],
+            'discount' => ['numeric'],
+            'categories' => ['required' , 'array' , new CheckCategoryItemsRule()],
             'categories.*' => [ 'numeric' , 'exists:categories,id'],
         ];
     }
